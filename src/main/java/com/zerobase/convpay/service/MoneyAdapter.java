@@ -7,6 +7,7 @@ public class MoneyAdapter {   // 결제 서비스 -> 머니 어댑터
     public MoneyUseResult use(Integer payAmount) {   // 머니 사용
         System.out.println("MoneyAdapter.use : " + payAmount);
 
+        //fail fast 적용
         if (payAmount > 1000_000) {   // 너무 큰 금액은 실패
             return MoneyUseResult.USE_FAIL;
         }
@@ -18,6 +19,7 @@ public class MoneyAdapter {   // 결제 서비스 -> 머니 어댑터
     public MoneyUseCancelResult useCancel(Integer payCancelAmount) {   // 머니 사용취소
         System.out.println("MoneyAdapter.useCancel : " + payCancelAmount);
 
+        //fail fast 적용
         if (payCancelAmount < 100) {   // 너무 작은 금액은 실패
             return MoneyUseCancelResult.MONEY_USE_CANCEL_FAIL;
         }
