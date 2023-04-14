@@ -1,5 +1,7 @@
 package com.zerobase.convpay.dto;
 
+import com.zerobase.convpay.type.ConvenienceType;
+
 public class PayRequest {   // 결제 요청    **패키지 dto는 외부와 통신? 하는 패키지
     // 편의점 종류
     ConvenienceType convenienceType;   // enum 타입 클래스

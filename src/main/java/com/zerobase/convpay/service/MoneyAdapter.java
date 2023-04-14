@@ -1,5 +1,8 @@
 package com.zerobase.convpay.service;
 
+import com.zerobase.convpay.type.MoneyUseCancelResult;
+import com.zerobase.convpay.type.MoneyUseResult;
+
 public class MoneyAdapter {   // 결제 서비스 -> 머니 어댑터
     public MoneyUseResult use(Integer payAmount) {   // 머니 사용
         System.out.println("MoneyAdapter.use : " + payAmount);
@@ -12,7 +15,12 @@ public class MoneyAdapter {   // 결제 서비스 -> 머니 어댑터
 
 
 
-    public void useCancel() {   // 머니 사용취소
+    public MoneyUseCancelResult useCancel(Integer payCancelAmount) {   // 머니 사용취소
+        System.out.println("MoneyAdapter.useCancel : " + payCancelAmount);
 
+        if (payCancelAmount < 100) {   // 너무 작은 금액은 실패
+            return MoneyUseCancelResult.MONEY_USE_CANCEL_FAIL;
+        }
+        return MoneyUseCancelResult.MONEY_USE_CANCEL_SUCCESS;  // 그 외는 무조건 성공
     }
 }

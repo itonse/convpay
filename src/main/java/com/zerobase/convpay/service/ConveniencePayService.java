@@ -1,8 +1,8 @@
 package com.zerobase.convpay.service;
 
-import com.zerobase.convpay.dto.PayRequest;
-import com.zerobase.convpay.dto.PayResponse;
-import com.zerobase.convpay.dto.PayResult;
+import com.zerobase.convpay.dto.*;
+import com.zerobase.convpay.type.MoneyUseResult;
+import com.zerobase.convpay.type.PayResult;
 
 public class ConveniencePayService {   // *편결이* 결제 서비스(편결이에서 가장 메인이 되는 서비스)
     private final MoneyAdapter moneyAdapter = new MoneyAdapter();  // 머니 어댑터는 한번 만들고나서 바꾸면 안되기 때문에 final로 지정.
@@ -33,8 +33,8 @@ public class ConveniencePayService {   // *편결이* 결제 서비스(편결이
         return new PayResponse(PayResult.SUCCESS, payRequest.getPayAmount());   // 성공케이스는 가작 마지막에
     }
 
-    public void payCancel() {  // 결제취소 기능
-
+    public PayCancelResponse payCancel(PayCancelRequest payCancelRequest) {  // 결제취소 기능
+        moneyAdapter.useCancel(payCancelRequest.getPayCancelAmount());   // 이 금액만큼 결제 취소를 함.
     }
 
 }
