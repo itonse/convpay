@@ -13,19 +13,7 @@ public class ConveniencePayService {   // *편결이* 결제 서비스(편결이
         MoneyUseResult moneyUseResult =
                 moneyAdapter.use(payRequest.getPayAmount());
 
-
-        // fail fast 방법: 예외케이스를 먼저 처리하고(빨리 실패를 해버리고) else로 옳은 케이스 처리하기 -> 읽기편하고, 유지보수 용이
-
-        // Method()
-
-        // Exception case5
-        // Exception case4
-        // Exception case1
-        // Exception case2
-        // Exception case3
-
-        // Success Case (Only one)
-
+        // fail fast 방법: 아래 주석으로 설명
 
         if (moneyUseResult == MoneyUseResult.USE_FAIL) {    // 실패케이스 먼저 처리
             return new PayResponse(PayResult.FAIL, 0);
@@ -50,3 +38,15 @@ public class ConveniencePayService {   // *편결이* 결제 서비스(편결이
     }
 
 }
+
+// fail fast 방법: 예외케이스를 먼저 처리하고(빨리 실패를 해버리고) else로 옳은 케이스 처리하기 -> 읽기편하고, 유지보수 용이
+
+// Method()
+
+// Exception case5
+// Exception case4
+// Exception case1
+// Exception case2
+// Exception case3
+
+// Success Case (Only one)
