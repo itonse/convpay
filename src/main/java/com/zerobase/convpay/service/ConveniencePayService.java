@@ -32,7 +32,7 @@ public class ConveniencePayService {   // *편결이* 결제 서비스(편결이
         }
 
         // Success Case
-        return new PayResponse(PayResult.SUCCESS, payRequest.getPayAmount());   // 성공케이스는 가작 마지막에
+        return new PayResponse(PayResult.SUCCESS, payRequest.getPayAmount());   // 성공케이스는 가장 마지막에
     }
 
     public PayCancelResponse payCancel(PayCancelRequest payCancelRequest) {  // 결제취소 기능
