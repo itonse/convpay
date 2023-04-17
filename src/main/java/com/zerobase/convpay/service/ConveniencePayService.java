@@ -8,24 +8,20 @@ public class ConveniencePayService {   // *편결이* 결제 서비스(편결이
     private final CardAdapter cardAdapter = new CardAdapter();
 
     public PayResponse pay(PayRequest payRequest) {   // 결제 기능: 매개면수로 '결제요청'을 받아서
-        CardUseResult cardUseResult;
-        MoneyUseResult moneyUseResult;
+        PaymentInterface paymentInterface;   // 인터페이스 불러오기
 
-        if (payRequest.getPayMethodType() == PayMethodType.CARD) {   // 결제수단:신용카드
-            cardAdapter.authorization();  // 승인
-            cardAdapter.approval();
-            cardUseResult = cardAdapter.capture(payRequest.getPayAmount());
-        } else {    // 결제수단: 현금
-            moneyUseResult =
-                    moneyAdapter.use(payRequest.getPayAmount());   // 머니어댑터를 통해서 머니를 use 하도록 요청을 주고 그 응답값에 따라서 아래 if문 처리
+        if (payRequest.getPayMethodType() == PayMethodType.CARD) {   // 결제수단이 카드이면
+            paymentInterface = cardAdapter;     // 인터페이스에 카드어댑터 넣기
+        } else {    // 결제수단이 현금이면
+            paymentInterface = moneyAdapter;    // 인터페이스에 머니어댑터 넣기
         }
 
+        PaymentResult paymentResult = paymentInterface.payment(payRequest.getPayAmount());   // 페이먼트를 호출하고 결제금액 넣기
 
 
         // fail fast 방법: 맨 아래 주석으로 설명
 
-        if (cardUseResult == cardUseResult.USE_FAIL ||
-                moneyUseResult == MoneyUseResult.USE_FAIL) {    // 실패케이스 먼저 처리
+        if (paymentResult == PaymentResult.PAYMENT_FAIL) {
             return new PayResponse(PayResult.FAIL, 0);   // 결제가 실패됬으면 결제 결과가 FAIL이고, 지불한 금액은 0원이다.
         }
 
@@ -34,11 +30,21 @@ public class ConveniencePayService {   // *편결이* 결제 서비스(편결이
     }
 
     public PayCancelResponse payCancel(PayCancelRequest payCancelRequest) {  // 결제취소 기능 (결제요청 기능과 거의 비슷)
-        MoneyUseCancelResult moneyUseCancelResult = moneyAdapter.useCancel(   // 머니어댑터를 통해서 사용취소를 함
-                payCancelRequest.getPayCancelAmount());// 이 금액만큼 결제 취소를 함.
+        PaymentInterface paymentInterface;   // 인터페이스 불러오기
+
+        if (payCancelRequest.getPayMethodType() == PayMethodType.CARD) {   // 결제수단이 카드이면
+            paymentInterface = cardAdapter;     // 인터페이스에 카드어댑터 넣기
+        } else {    // 결제수단이 현금이면
+            paymentInterface = moneyAdapter;    // 인터페이스에 머니어댑터 넣기
+        }
+
+
+        CancelPaymentResult cancelPaymentResult =
+                paymentInterface.cancelPayment(payCancelRequest.getPayCancelAmount());
+
 
         // Fail Case
-        if (moneyUseCancelResult == MoneyUseCancelResult.MONEY_USE_CANCEL_FAIL) {    // 결제취소 결과가 실패이면,
+        if (cancelPaymentResult == CancelPaymentResult.CANCEL_PAYMENT_FAIL) {    // 결제취소 결과가 실패이면,
             return new PayCancelResponse(PayCancelResult.PAY_CANCEL_FAIL, 0);  // 결제취소 실패로 결과를 주고, 결제취소된 금액은 0원
         }
 
