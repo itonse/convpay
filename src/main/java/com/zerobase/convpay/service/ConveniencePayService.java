@@ -6,6 +6,10 @@ import com.zerobase.convpay.type.*;
 public class ConveniencePayService {   // *편결이* 결제 서비스(편결이에서 가장 메인이 되는 서비스) (pay, payCancel 기능 제공)
     private final MoneyAdapter moneyAdapter = new MoneyAdapter();  // 머니 어댑터는 한번 만들고나서 바꾸면 안되기 때문에 final로 지정.
     private final CardAdapter cardAdapter = new CardAdapter();
+    //// 결제수단별, 편의점별, 기타등등 할인을 넣고 싶을 때 인터페이스를 이용하면 할인정책을 바꾸기 용이 (By OCP).
+    //private final DiscountInterface discountInterface = new DiscountByPayMethod();  // 결제수단별 할인 인터페이스
+    private final DiscountInterface discountInterface = new DiscountBYConvenience();  // 편의점별 할인 인터페이스
+    //private final DiscountInterface discountInterface = new DiscountAll();  // 무조건 할인 들어감
 
     public PayResponse pay(PayRequest payRequest) {   // 결제 기능: 매개면수로 '결제요청'을 받아서
         PaymentInterface paymentInterface;   // 인터페이스 불러오기
@@ -16,7 +20,8 @@ public class ConveniencePayService {   // *편결이* 결제 서비스(편결이
             paymentInterface = moneyAdapter;    // 인터페이스에 머니어댑터 넣기
         }
 
-        PaymentResult paymentResult = paymentInterface.payment(payRequest.getPayAmount());   // 페이먼트를 호출하고 결제금액 넣기
+        Integer discountedAmount = discountInterface.getDiscountedAmount(payRequest);   // 먼저 결제수단별 할인 받기
+        PaymentResult paymentResult = paymentInterface.payment(discountedAmount);   // 페이먼트를 호출하고 할인된 결제금액 넣기
 
 
         // fail fast 방법: 맨 아래 주석으로 설명
@@ -26,7 +31,7 @@ public class ConveniencePayService {   // *편결이* 결제 서비스(편결이
         }
 
         // Success Case (성공케이스는 가장 마지막에)
-        return new PayResponse(PayResult.SUCCESS, payRequest.getPayAmount());   // 성고했을 때는 결제 결과가 SUCCESS, 금액은 내가 요청한 금액
+        return new PayResponse(PayResult.SUCCESS, discountedAmount);   // 성고했을 때는 결제 결과가 SUCCESS, 금액은 내가 요청한 금액
     }
 
     public PayCancelResponse payCancel(PayCancelRequest payCancelRequest) {  // 결제취소 기능 (결제요청 기능과 거의 비슷)
