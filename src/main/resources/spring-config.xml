@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="conveniencePayService" class="com.zerobase.convpay.service.ConveniencePayService">
+        <constructor-arg name="paymentInterfaceSet"> <!--첫번째 파라미터-->
+            <set>
+                <ref bean="moneyAdapter"/>
+                <ref bean="cardAdapter"/>
+            </set>
+        </constructor-arg>
+        <constructor-arg name="discountInterface" ref="discountByConvenience"/> <!--두번째 파라미터-->
+    </bean>
+
+    <bean id="cardAdapter" class="com.zerobase.convpay.service.CardAdapter"/>    <!--생성자가 없으므로 닫음-->
+    <bean id="moneyAdapter" class="com.zerobase.convpay.service.MoneyAdapter"/>
+    <bean id="discountByConvenience" class="com.zerobase.convpay.service.DiscountByConvenience"/>
+
+</beans>
+
+<!--DI 완성 (의존관계 설정을 위해 클래스를 직접 고치지 않고 여기서 해준다.)-->

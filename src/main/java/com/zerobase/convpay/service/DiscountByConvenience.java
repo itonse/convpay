@@ -2,7 +2,7 @@ package com.zerobase.convpay.service;
 
 import com.zerobase.convpay.dto.PayRequest;
 
-public class DiscountBYConvenience implements DiscountInterface {
+public class DiscountByConvenience implements DiscountInterface {
 
     @Override
     public Integer getDiscountedAmount(PayRequest payRequest) {

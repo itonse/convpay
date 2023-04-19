@@ -20,7 +20,7 @@ class ConveniencePayServiceTest {
             new HashSet<>(
                     Arrays.asList(new MoneyAdapter(), new CardAdapter())
             ),
-            new DiscountBYConvenience()
+            new DiscountByConvenience()
     );
 
     @Test

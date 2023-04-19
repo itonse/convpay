@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DiscountBYConvenienceTest {
-    DiscountBYConvenience discountBYConvenience = new DiscountBYConvenience();
+class DiscountByConvenienceTest {
+    DiscountByConvenience discountByConvenience = new DiscountByConvenience();
 
     @Test
     void discountTest() {
@@ -21,9 +21,9 @@ class DiscountBYConvenienceTest {
                 new PayRequest(PayMethodType.MONEY, ConvenienceType.SEVEN, 1000);
 
         //when
-        Integer discountedAmountG25 = discountBYConvenience.getDiscountedAmount(payRequestG25);
-        Integer discountedAmountGU = discountBYConvenience.getDiscountedAmount(payRequestGU);
-        Integer discountedAmountSEVEN = discountBYConvenience.getDiscountedAmount(payRequestSEVEN);
+        Integer discountedAmountG25 = discountByConvenience.getDiscountedAmount(payRequestG25);
+        Integer discountedAmountGU = discountByConvenience.getDiscountedAmount(payRequestGU);
+        Integer discountedAmountSEVEN = discountByConvenience.getDiscountedAmount(payRequestSEVEN);
 
         //then
         assertEquals(800, discountedAmountG25);
