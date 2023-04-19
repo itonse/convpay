@@ -1,10 +1,14 @@
 package com.zerobase.convpay.service;
 
 import com.zerobase.convpay.type.*;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 @Component
+// @Scope("singleton")    // 아래 클래스를 계속 바꿔야 될 때    3개 모두 빈을 꺼내올때마다 빈을 새로 만듦.
+// @Scope("request")   // 요청에 따라서 계속 바꿔야 할 때
+// @Scope("prototype")   // 요청에 따라서 계속 바뀜
 public class CardAdapter implements PaymentInterface{  // 카드어댑터는 페이먼트인터페이스를 의존
     // 1. 인증
     public void authorization() {

@@ -2,6 +2,8 @@ package com.zerobase.convpay.service;
 
 import com.zerobase.convpay.dto.*;
 import com.zerobase.convpay.type.*;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -17,7 +19,9 @@ public class ConveniencePayService {   // *편결이* 결제 서비스(편결이
     private final DiscountInterface discountInterface;
 
     public ConveniencePayService(Set<PaymentInterface> paymentInterfaceSet,
-                                 DiscountInterface discountByConvenience) {   // 디스카운트 인터페이스의 구현체는 두개인데 Component 등록을 위해서는 구현체 하나를 정한다.
+                                 // @Qualifier("discountByConvenience")   // 디스카운트 인터페이스의 구현체는 두개인데(결제수단 별,편의점 별) 편의점에 따른 디스카운트로 정하겠다.
+                                                                        // @Priority 보다 강력
+                                 DiscountInterface discountInterface) {
         paymentInterfaceSet.forEach(
                 paymentInterface -> paymentInterfaceMap.put(
                         paymentInterface.getPayMethodType(),
@@ -25,7 +29,7 @@ public class ConveniencePayService {   // *편결이* 결제 서비스(편결이
                 )
         );
 
-        this.discountInterface = discountByConvenience;
+        this.discountInterface = discountInterface;
     }
 
     public PayResponse pay(PayRequest payRequest) {   // 결제 기능: 매개면수로 '결제요청'을 받아서

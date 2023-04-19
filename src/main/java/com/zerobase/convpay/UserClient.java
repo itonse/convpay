@@ -24,6 +24,7 @@ public class UserClient {
                         ConveniencePayService.class);
             // ConveniencePayService 에서 등록했던 Bean들을 가져옴.
 
+
         // G25, 결제 50원
         PayRequest payRequest = new PayRequest(PayMethodType.CARD,
                 ConvenienceType.G25, 50);

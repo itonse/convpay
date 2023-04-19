@@ -1,13 +1,17 @@
 package com.zerobase.convpay.service;
 
 import com.zerobase.convpay.dto.PayRequest;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
+// @Profile("production")    // 환경변수에 producton 이라는 프로필이 정의된 경우에만 이 빈 생성
 public class DiscountByPayMethod implements DiscountInterface{
 
     @Override
     public Integer getDiscountedAmount(PayRequest payRequest) {
+        System.out.println("DiscountByPayMethod called");
         switch (payRequest.getPayMethodType()) {
 
             case MONEY:
