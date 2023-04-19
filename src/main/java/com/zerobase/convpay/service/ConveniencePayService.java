@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class ConveniencePayService {   // *편결이* 결제 서비스(편결이에서 가장 메인이 되는 서비스) (pay, payCancel 기능 제공)
+        // 편결이는 자기 본연의 업무만 수행함. (SRP 원칙 적용)
     private final Map<PayMethodType, PaymentInterface> paymentInterfaceMap =
             new HashMap<>();
         // 페이메소드 타입에 따라 페이먼트인터페이스를 키, 밸류로 갖는 맵 타입의 페이먼트인터페이스 맵 생성
