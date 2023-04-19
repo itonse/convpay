@@ -1,7 +1,10 @@
 package com.zerobase.convpay.service;
 
 import com.zerobase.convpay.type.*;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+@Component
 public class CardAdapter implements PaymentInterface{  // 카드어댑터는 페이먼트인터페이스를 의존
     // 1. 인증
     public void authorization() {

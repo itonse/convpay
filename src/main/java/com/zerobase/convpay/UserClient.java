@@ -16,7 +16,7 @@ public class UserClient {
     public static void main(String[] args) {
         // 사용자는 스프링 안으로 접근
         ApplicationContext applicationContext =
-                new ClassPathXmlApplicationContext("spring-config.xml");
+                new AnnotationConfigApplicationContext(ApplicationConfig.class);   // 요걸 활용해서 Bean들을 등록하고 올림.
             // 스프링 컨테이너를 관리하는 applicationContext를 만듦. 만들면서 구성 정보는 ApplicationConfig.class 를 참고하도록 요청.
 
         ConveniencePayService conveniencePayService =

@@ -2,11 +2,13 @@ package com.zerobase.convpay.service;
 
 import com.zerobase.convpay.dto.*;
 import com.zerobase.convpay.type.*;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+@Component
 public class ConveniencePayService {   // *편결이* 결제 서비스(편결이에서 가장 메인이 되는 서비스) (pay, payCancel 기능 제공)
         // 편결이는 자기 본연의 업무만 수행함. (SRP 원칙 적용)
     private final Map<PayMethodType, PaymentInterface> paymentInterfaceMap =
@@ -15,7 +17,7 @@ public class ConveniencePayService {   // *편결이* 결제 서비스(편결이
     private final DiscountInterface discountInterface;
 
     public ConveniencePayService(Set<PaymentInterface> paymentInterfaceSet,
-                                 DiscountInterface discountInterface) {
+                                 DiscountInterface discountByConvenience) {   // 디스카운트 인터페이스의 구현체는 두개인데 Component 등록을 위해서는 구현체 하나를 정한다.
         paymentInterfaceSet.forEach(
                 paymentInterface -> paymentInterfaceMap.put(
                         paymentInterface.getPayMethodType(),
@@ -23,7 +25,7 @@ public class ConveniencePayService {   // *편결이* 결제 서비스(편결이
                 )
         );
 
-        this.discountInterface = discountInterface;
+        this.discountInterface = discountByConvenience;
     }
 
     public PayResponse pay(PayRequest payRequest) {   // 결제 기능: 매개면수로 '결제요청'을 받아서
