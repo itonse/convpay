@@ -1,4 +1,4 @@
-# convpay
+# 편의점 결제 서비스
 
 ![image](https://user-images.githubusercontent.com/76129297/232651481-81de538c-143b-4ed7-a74d-cbded82a8fc0.png)
 
