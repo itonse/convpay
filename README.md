@@ -10,5 +10,4 @@
 
 ![tempsnip](https://user-images.githubusercontent.com/76129297/232649001-75380130-a321-4ecf-986b-286930d92b5c.png)
 
-![tempsnip3](https://user-images.githubusercontent.com/76129297/232951003-b0c0ebfd-e27a-4e72-886c-aa6b0c7d765f.png)
-
+![tempsnip3](https://user-images.githubusercontent.com/76129297/232951374-30e504ed-06f9-4ffb-993e-87351b851bd4.png)
