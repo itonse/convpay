@@ -1,4 +1,4 @@
-# convpay
+# 편의점 결제 서비스
 
 ![image](https://user-images.githubusercontent.com/76129297/232651481-81de538c-143b-4ed7-a74d-cbded82a8fc0.png)
 
@@ -11,3 +11,6 @@
 ![tempsnip](https://user-images.githubusercontent.com/76129297/232649001-75380130-a321-4ecf-986b-286930d92b5c.png)
 
 ![tempsnip3](https://user-images.githubusercontent.com/76129297/232951374-30e504ed-06f9-4ffb-993e-87351b851bd4.png)
+
+![tempsnip4](https://user-images.githubusercontent.com/76129297/232976572-81f54fd6-39b8-47a7-b228-15bf34814ce9.png)
+
