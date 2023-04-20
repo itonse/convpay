@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 // @Profile("test")   // 환경변수에 test라는 프로필이 정의된 경우에만 이 빈 생성
-// @Primary  // 할인방법 두개 중에 편의점에 따른 할인을 우선순위로 하겠다.
+@Primary  // 할인방법 두개 중에 편의점에 따른 할인을 우선순위로 하겠다.
 public class DiscountByConvenience implements DiscountInterface {
 
     @Override

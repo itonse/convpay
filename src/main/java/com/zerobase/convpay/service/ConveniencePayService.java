@@ -2,6 +2,7 @@ package com.zerobase.convpay.service;
 
 import com.zerobase.convpay.dto.*;
 import com.zerobase.convpay.type.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ public class ConveniencePayService {   // *편결이* 결제 서비스(편결이
         // 페이메소드 타입에 따라 페이먼트인터페이스를 키, 밸류로 갖는 맵 타입의 페이먼트인터페이스 맵 생성
     private final DiscountInterface discountInterface;
 
-    public ConveniencePayService(Set<PaymentInterface> paymentInterfaceSet,
+    public ConveniencePayService(Set<PaymentInterface> paymentInterfaceSet,     // Cunstructor Injection(생성자 주입) 방식(추천!)이다. <-> Field Injection(필드 주입)(비선호)
                                  // @Qualifier("discountByConvenience")   // 디스카운트 인터페이스의 구현체는 두개인데(결제수단 별,편의점 별) 편의점에 따른 디스카운트로 정하겠다.
                                                                         // @Priority 보다 강력
                                  DiscountInterface discountInterface) {
